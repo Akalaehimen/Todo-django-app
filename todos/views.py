@@ -2,84 +2,15 @@ from django.shortcuts import render
 from rest_framework  import generics, status
 from rest_framework.decorators import api_view, APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import *
 from django.http import Http404
 from .models import *
-
-# Create your views here.
-
-# class ListTodo(generics.ListAPIView):
-#     queryset = Todo.objects.all()
-#     serializer_class = ToDoSerializer
-# class DetailTodo(generics.RetrieveUpdateAPIView):
-#     queryset = Todo.objects.all()
-#     serializer_class = ToDoSerializer
-# class CreateTodo(generics.CreateAPIView):
-#     queryset = Todo.objects.all()
-#     serializer_class = ToDoSerializer
-# class DeleteTodo(generics.DestroyAPIView):
-#     queryset = Todo.objects.all()
-#     serializer_class = ToDoSerializer
-
-# @api_view(['POST'])
-# def registertodo(request):
-
-#     reg = Todo.objects.create(
-#         Title = request.data['Title'],
-#         Description = request.data['Description'],
-#         Date = request.data['Date'],
-#         Completed = request.data['Completed'],
-#     )
-#     serializer = ToDoSerializer(reg, many=True)
-#     return Response(serializer.data)
-
-# @api_view(['POST'])
-# def updatetodo(request):
-
-#     regs = Todo.objects.update(
-#         Title = request.data['Title'],
-#         Description = request.data['Description'],
-#         Date = request.data['Date'],
-#         Completed = request.data['Completed'],
-#     )
-#     serializer = ToDoSerializer(regs, many=True)
-#     return Response(serializer.data)
-
-# @api_view(['GET'])
-# def retrive(response, pk):
-
-#     regss = Todo.objects.get(pk=pk)
-#     serializer = ToDoSerializer(regss, many=True)
-#     return Response(serializer.data)
-
-
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def snippet_detail(request, pk):
-#     """
-#     Retrieve, update or delete a code snippet.
-#     """
-#     try:
-#         snippet = Snippet.objects.get(pk=pk)
-#     except Snippet.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-
-#     if request.method == 'GET':
-#         serializer = SnippetSerializer(snippet)
-#         return Response(serializer.data)
-
-#     elif request.method == 'PUT':
-#         serializer = SnippetSerializer(snippet, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-#     elif request.method == 'DELETE':
-#         snippet.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
+ 
 
 
 class Updatingtodos(APIView):
+    permission_classes = [IsAuthenticated]
     """
     Retrieve, update or delete a snippet instance.
     """
@@ -109,6 +40,7 @@ class Updatingtodos(APIView):
 
 
 class Creatingandgetting(APIView):
+    permission_classes = [IsAuthenticated]
     """
     Creating or getting the whole todos.
     """
