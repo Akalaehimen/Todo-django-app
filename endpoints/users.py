@@ -40,27 +40,17 @@ class RegisterView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class LoginView(ObtainAuthToken):
-    def post(self, request, *args, **kwargs):
-        request.data['username'] = request.data['username'].lower()
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key,
-                         'email': user.email
-                         })
 
 
-# class LogoutView(APIView):
-#     permission_classes = (IsAuthenticated,)
 
-#     def post(self, request):
-#         request.user.auth_token.delete()
-#         return Response(
-#             {"message": "Logout successful"},
-#             status=status.HTTP_200_OK)
+class LogoutView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        request.user.auth_token.delete()
+        return Response(
+            {"message": "Logout successful"},
+            status=status.HTTP_200_OK)
 
 
 
