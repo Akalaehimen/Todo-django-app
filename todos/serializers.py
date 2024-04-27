@@ -8,12 +8,12 @@ class ToDoSerializer(serializers.ModelSerializer):
 
 
 # users serializers
-class UserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(max_length=150, required=True)
-    email = serializers.EmailField(max_length=254, required=True)
-    first_name = serializers.CharField(max_length=150, required=True)
-    last_name = serializers.CharField(max_length=150, required=True)
-    password = serializers.CharField(max_length=128, write_only=True)
+# class UserSerializer(serializers.ModelSerializer):
+#     username = serializers.CharField(max_length=150, required=True)
+#     email = serializers.EmailField(max_length=254, required=True)
+#     first_name = serializers.CharField(max_length=150, required=True)
+#     last_name = serializers.CharField(max_length=150, required=True)
+#     password = serializers.CharField(max_length=128, write_only=True)
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

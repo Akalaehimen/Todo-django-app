@@ -27,30 +27,30 @@ class RegisterView(APIView):
                 return Response({"message": "Invalid email"}, status=status.HTTP_400_BAD_REQUEST)
             
             # Create user with provided data
-            user = CustomUserManager.objects.create_user(
-                email=email,
-                username=username,
-                first_name=first_name,
-                last_name=last_name,
-                password=password  # Pass password to create_user method
-            )
+            # user = CustomUserManager.objects.create_user(
+            #     email=email,
+            #     username=username,
+            #     first_name=first_name,
+            #     last_name=last_name,
+            #     password=password  # Pass password to create_user method
+            # )
             
             # Additional logic as needed
             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class LoginView(ObtainAuthToken):
-#     def post(self, request, *args, **kwargs):
-#         request.data['username'] = request.data['username'].lower()
-#         serializer = self.serializer_class(data=request.data,
-#                                            context={'request': request})
-#         serializer.is_valid(raise_exception=True)
-#         user = serializer.validated_data['user']
-#         token, created = Token.objects.get_or_create(user=user)
-#         return Response({'token': token.key,
-#                          'email': user.email
-#                          })
+class LoginView(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        request.data['username'] = request.data['username'].lower()
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key,
+                         'email': user.email
+                         })
 
 
 # class LogoutView(APIView):
