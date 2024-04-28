@@ -44,49 +44,49 @@ from todos.utils import validate_email, validate_password
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
-# class RegisterView(APIView):
-#     permission_classes = (AllowAny,)
+class RegisterView(APIView):
+    permission_classes = (AllowAny,)
 
-#     def post(self, request):
-#         serializer = UserSerializer(data=request.data)
-#         if serializer.is_valid():
-#             # Extract registration data from serializer
-#             email = serializer.validated_data['email']
-#             username = serializer.validated_data['username']
-#             first_name = serializer.validated_data['first_name']
-#             last_name = serializer.validated_data['last_name']
-#             password = serializer.validated_data['password']  
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            # Extract registration data from serializer
+            email = serializer.validated_data['email']
+            username = serializer.validated_data['username']
+            first_name = serializer.validated_data['first_name']
+            last_name = serializer.validated_data['last_name']
+            password = serializer.validated_data['password']  
             
-#             # check if the user is providing a valid email
-#             if not validate_email(serializer.validated_data['email']):
-#                 return Response({"message": "Invalid email"}, status=status.HTTP_400_BAD_REQUEST)
+            # check if the user is providing a valid email
+            if not validate_email(serializer.validated_data['email']):
+                return Response({"message": "Invalid email"}, status=status.HTTP_400_BAD_REQUEST)
             
 
-#             # Check if email already exists
-#             if get_user_model().objects.filter(email=email).exists():
-#                 return Response({"message": "Email already exists"}, status=status.HTTP_400_BAD_REQUEST)
+            # Check if email already exists
+            if get_user_model().objects.filter(email=email).exists():
+                return Response({"message": "Email already exists"}, status=status.HTTP_400_BAD_REQUEST)
             
-#              # Check if username already exists
-#             if get_user_model().objects.filter(username=username).exists():
-#                 return Response({"message": "Username is already Taken"}, status=status.HTTP_400_BAD_REQUEST)
+             # Check if username already exists
+            if get_user_model().objects.filter(username=username).exists():
+                return Response({"message": "Username is already Taken"}, status=status.HTTP_400_BAD_REQUEST)
             
-#             # check if the user meets the criteria for the password
-#             if not validate_password(serializer.validated_data['password']):
-#                 return Response({"message": "   Ensure your password contains uppercase, lowercase, special character and is up to 6"}, status=status.HTTP_400_BAD_REQUEST)
+            # check if the user meets the criteria for the password
+            if not validate_password(serializer.validated_data['password']):
+                return Response({"message": "   Ensure your password contains uppercase, lowercase, special character and is up to 6"}, status=status.HTTP_400_BAD_REQUEST)
 
-#             # Create user with provided data
-#             user = get_user_model().objects.create_user(
-#                 email=email,
-#                 username=username,
-#                 first_name=first_name,
-#                 last_name=last_name,
-#                 password=password
-#             )
+            # Create user with provided data
+            user = get_user_model().objects.create_user(
+                email=email,
+                username=username,
+                first_name=first_name,
+                last_name=last_name,
+                password=password
+            )
             
-#             # Additional logic as needed
+            # Additional logic as needed
             
-#             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(APIView):
