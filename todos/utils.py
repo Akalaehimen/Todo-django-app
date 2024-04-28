@@ -9,6 +9,7 @@ def validate_email(email):
 
 
 def validate_password(password):
-    if not re.match(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$", password) or " " in password:
+    # check if the password contains uppercase, lowercase, digit, and special character, and is not less than 5 characters
+    if not re.match(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$", password):
         return False
     return True
