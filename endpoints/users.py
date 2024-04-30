@@ -134,4 +134,13 @@ class LogoutView(APIView):
             {"message": "Logout successful"},
             status=status.HTTP_200_OK)
 
-
+class DeleteUserView(APIView):
+    def delete(self, request, user_id):
+        try:
+            user = User.objects.get(id=user_id)
+            user.delete()
+            return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+        except User.DoesNotExist:
+            return Response({"message": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
