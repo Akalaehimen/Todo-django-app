@@ -45,26 +45,26 @@ class Updatingtodos(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# class Creatingandgetting(APIView):
-#     permission_classes = (IsAuthenticated,)
-#     """
-#     Creating or getting the whole todos.
-#     """
-#     def get_object(self):
-#         try:
-#             return Todo.objects.all()
-#         except Todo.DoesNotExist:
-#             raise Http404
+class Creatingandgetting(APIView):
+    permission_classes = (IsAuthenticated,)
+    """
+    Creating or getting the whole todos.
+    """
+    def get_object(self):
+        try:
+            return Todo.objects.all()
+        except Todo.DoesNotExist:
+            raise Http404
 
-#     def get(self, request, format=None):
-#         snippets = self.get_object()  # Use get_object() to fetch queryset15
-#         serializer = ToDoSerializer(snippets, many=True)  # Use many=True for queryset
-#         return Response(serializer.data)
+    def get(self, request, format=None):
+        snippets = self.get_object()  # Use get_object() to fetch queryset15
+        serializer = ToDoSerializer(snippets, many=True)  # Use many=True for queryset
+        return Response(serializer.data)
 
-#     def post(self, request, format=None):
+    def post(self, request, format=None):
         
-#         serializer = ToDoSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_201_CREATED)
+        serializer = ToDoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_201_CREATED)
