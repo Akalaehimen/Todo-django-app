@@ -15,12 +15,12 @@ class ToDoSerializer(serializers.ModelSerializer):
 #     last_name = serializers.CharField(max_length=150, required=True)
 #     password = serializers.CharField(max_length=128, write_only=True)
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password', 'first_name', 'last_name'
-                  )
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ('id', 'username', 'email', 'password', 'first_name', 'last_name'
+#                   )
 
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
+#     def create(self, validated_data):
+#         user = User.objects.create_user(**validated_data)
+#         return user
