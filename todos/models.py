@@ -17,13 +17,13 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-class Todo(models.Model):
-    Title = models.CharField(max_length=100, blank=False)
-    Description = models.TextField(blank=True)
-    Date = models.DateField(blank=False)
-    Completed = models.BooleanField(default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)  # ForeignKey relationship with User model
+# class Todo(models.Model):
+#     Title = models.CharField(max_length=100, blank=False)
+#     Description = models.TextField(blank=True)
+#     Date = models.DateField(blank=False)
+#     Completed = models.BooleanField(default=False)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)  # ForeignKey relationship with User model
 
 
-    def __str__(self):
-        return self.Title
+#     def __str__(self):
+#         return self.Title
