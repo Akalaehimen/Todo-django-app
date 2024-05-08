@@ -115,24 +115,24 @@ class LoginView(APIView):
 
 
 
-class LogoutView(APIView):
-    permission_classes = (IsAuthenticated,)
+# class LogoutView(APIView):
+#     permission_classes = (IsAuthenticated,)
 
-    def post(self, request):
-        # Check if the user has an authentication token
-        try:
-            token = Token.objects.get(user=request.user)
-        except Token.DoesNotExist:
-            return Response(
-                {"message": "User is not authenticated with a token"},
-                status=status.HTTP_400_BAD_REQUEST)
+#     def post(self, request):
+#         # Check if the user has an authentication token
+#         try:
+#             token = Token.objects.get(user=request.user)
+#         except Token.DoesNotExist:
+#             return Response(
+#                 {"message": "User is not authenticated with a token"},
+#                 status=status.HTTP_400_BAD_REQUEST)
 
-        # Delete the authentication token
-        token.delete()
+#         # Delete the authentication token
+#         token.delete()
         
-        return Response(
-            {"message": "Logout successful"},
-            status=status.HTTP_200_OK)
+#         return Response(
+#             {"message": "Logout successful"},
+#             status=status.HTTP_200_OK)
 
 class DeleteUserView(APIView):
     def delete(self, request, user_id):
